@@ -3,6 +3,9 @@ package com.tamnguyen.restaurant.entity;
 import com.tamnguyen.restaurant.enums.MembershipType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,7 +18,9 @@ import java.util.List;
  * @author Tam Nguyen
  */
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class User implements Serializable {
 
     @Serial

@@ -2,13 +2,18 @@ package com.tamnguyen.restaurant.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author Tam Nguyen
  */
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Role {
 
 
@@ -16,5 +21,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String roleName;
+
+    public Role(String roleName){
+
+        this.roleName = roleName;
+    }
 
 }
