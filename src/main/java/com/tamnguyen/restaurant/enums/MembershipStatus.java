@@ -1,8 +1,12 @@
 package com.tamnguyen.restaurant.enums;
 
+import lombok.Getter;
+
 /**
  * @author Tam Nguyen
  */
+
+@Getter
 public enum MembershipStatus {
 
     ACTIVE("Active"),
@@ -15,7 +19,5 @@ public enum MembershipStatus {
         this.displayStatus = displayStatus;
     }
 
-    public String getDisplayStatus(){
-        return displayStatus;
-    }
+
 }

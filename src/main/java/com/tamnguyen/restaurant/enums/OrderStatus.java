@@ -1,8 +1,11 @@
 package com.tamnguyen.restaurant.enums;
 
+import lombok.Getter;
+
 /**
  * @author Tam Nguyen
  */
+@Getter
 public enum OrderStatus {
 
     PENDING("Pending"),
@@ -19,7 +22,5 @@ public enum OrderStatus {
         this.displayOrderStatus = display;
     }
 
-    public String getDisplayOrderStatus(){
-        return displayOrderStatus;
-    }
+
 }

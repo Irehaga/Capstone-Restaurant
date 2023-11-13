@@ -10,7 +10,6 @@ import java.util.List;
  */
 
 @Data
-@NoArgsConstructor
 public class MenuItemDTO {
 
     private String name;

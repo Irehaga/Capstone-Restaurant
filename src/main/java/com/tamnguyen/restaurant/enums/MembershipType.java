@@ -1,8 +1,12 @@
 package com.tamnguyen.restaurant.enums;
 
+import lombok.Getter;
+
 /**
  * @author Tam Nguyen
  */
+
+@Getter
 public enum MembershipType {
 
     SILVER("Silver Membership"),
@@ -14,7 +18,5 @@ public enum MembershipType {
         this.displayName = displayName;
     }
 
-    public String getDisplayName(){
-        return displayName;
-    }
+
 }

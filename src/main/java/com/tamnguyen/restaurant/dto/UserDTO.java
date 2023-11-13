@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,8 +14,7 @@ import java.util.List;
  * @author Tam Nguyen
  */
 @Data
-@NoArgsConstructor
-public class CustomerDTO {
+public class UserDTO {
     @NotEmpty(message = "Can't be empty")
     @Size(max = 50)
     private String firstName;
