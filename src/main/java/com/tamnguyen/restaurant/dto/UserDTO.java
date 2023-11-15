@@ -1,6 +1,8 @@
 package com.tamnguyen.restaurant.dto;
 
 import com.tamnguyen.restaurant.enums.MembershipType;
+import com.tamnguyen.restaurant.validation.FieldMatch;
+import com.tamnguyen.restaurant.validation.ValidPassword;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -14,31 +16,18 @@ import java.util.List;
  * @author Tam Nguyen
  */
 @Data
+@FieldMatch.List({@FieldMatch(first = "password", second = "matchPassword", message = "Password fields don't match")})
 public class UserDTO {
-    @NotEmpty(message = "Can't be empty")
-    @Size(max = 50)
-    private String firstName;
 
-    @NotEmpty(message = "Can't be empty")
-    @Size(max = 50)
-    private String lastName;
-
-    @Email(message = "please provide email")
+    @Email(message = "Please enter Email")
     private String email;
 
-    @NotEmpty(message = "Please provide phone number")
-    private String phoneNumber;
 
-    @NotEmpty(message = "Please provide password")
-    @Size(min = 8, max = 30)
+    @NotEmpty(message = "Password cannot be empty")
+    @ValidPassword(message = "Provide valid password")
     private String password;
-    private String matchingPassword;
+    private String matchPassword;
 
-    private String address;
-    private LocalDate startDate;
-    private LocalDateTime registrationDate;
-
-    private MembershipType membershipType;
-    private List<OrderDTO> orders;
+    private String role;
 
 }

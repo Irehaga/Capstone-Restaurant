@@ -39,7 +39,7 @@ public class RoleRepositoryTest {
     void testFindRoleByName(){
 
         String expectedNameofRole = "CUSTOMER";
-       Role actualRole =  roleRepository.findRoleByroleName(expectedNameofRole);
+       Role actualRole =  roleRepository.findRoleByRoleName(expectedNameofRole);
         Assertions.assertEquals(expectedNameofRole, actualRole.getRoleName());
     }
 

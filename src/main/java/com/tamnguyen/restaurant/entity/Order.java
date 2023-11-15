@@ -2,7 +2,7 @@ package com.tamnguyen.restaurant.entity;
 
 import com.tamnguyen.restaurant.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,7 +14,10 @@ import java.util.List;
  */
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "restaurant_order")
 public class Order{
 
@@ -24,13 +27,12 @@ public class Order{
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
     private OrderStatus status;
     private LocalDateTime orderDate;
-    private String specialRequests;
-    private Boolean isDelivery;
-    private String deliveryAddress;
+    @Column(unique = true)
+    private String orderNumber;
 
 
     @ManyToMany(fetch = FetchType.LAZY)

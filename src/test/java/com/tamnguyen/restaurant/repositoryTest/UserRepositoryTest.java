@@ -29,17 +29,17 @@ public class UserRepositoryTest {
     @BeforeEach
     public void init(){
 
-        role = new Role();
-        role.setRoleName("CUSTOMER");
-        roleRepository.save(role);
-
-        user = new User();
-        user.setEmail("test@test.com");
-        user.setPassword("1234567");
-        user.setFirstName("Tam");
-        user.setLastName("nguyen");
-        user.setPhoneNumber("000-111-222");
-        user.setRoles(Arrays.asList(new Role("Customer")));
+//        role = new Role();
+//        role.setRoleName("CUSTOMER");
+//        roleRepository.save(role);
+//
+//        user = new User();
+//        user.setEmail("test@test.com");
+//        user.setPassword("1234567");
+//        user.setFirstName("Tam");
+//        user.setLastName("nguyen");
+//        user.setPhoneNumber("000-111-222");
+//        user.setRoles(Arrays.asList(new Role("Customer")));
 
 
     }

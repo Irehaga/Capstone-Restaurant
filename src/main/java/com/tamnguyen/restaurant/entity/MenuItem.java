@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class MenuItem {
     private String name;
     private String description;
     private Double price;
-    private Boolean isAvailable;
+    private String imageFileName;
 
     @ManyToMany(mappedBy = "items")
     private List<Order> orders;

@@ -13,6 +13,7 @@ public enum OrderStatus {
     IN_PROGRESS("In Progress"),
     READY("Ready"),
     DELIVERED("Delivered"),
+    NEW("New"),
     CANCELLED("Cancelled");
 
 

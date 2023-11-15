@@ -3,6 +3,7 @@ package com.tamnguyen.restaurant.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,5 +18,5 @@ public class MenuItemDTO {
     private Double price;
 
     private Boolean isAvailable;
-    private List<OrderDTO> orders;
+    private Collection<OrderDTO> orders;
 }
