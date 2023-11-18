@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration Successful</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+    <a class="navbar-brand" href="/">Chopstix Vietnamese Kitchen</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/menu">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/reservations">Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/customer/register">Register</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<div class="container mt-5">
+    <div class="card text-center">
+        <div class="card-header">
+            Registration Successful!
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Welcome to Chopstix Vietnamese Kitchen!</h5>
+            <p class="card-text">Thank you for registering with us. Your account has been created successfully.</p>
+            <a th:href="@{/login}" class="btn btn-primary">Log In</a>
+            <a th:href="@{/home}" class="btn btn-secondary">Return Home</a>
+        </div>
+        <div class="card-footer text-muted">
+            If you have any questions, feel free to <a th:href="@{/contact}">contact us</a>.
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

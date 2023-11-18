@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Account Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<h1>Customer Account Dashboard</h1>
+
+<!-- Customer Dashboard -->
+<div sec:authorize="hasRole('ROLE_CUSTOMER')" th:object="${customer}">
+    <a th:href="@{/order-history}">View Order History</a>
+    <a th:href="@{/edit-profile}">Edit Profile</a>
+    <div>
+        <label>Email:</label>
+        <p th:text="${customer.getEmail()}"></p>
+        <label>First Name:</label>
+        <p th:text="${customer.getFirstName()}"></p>
+        <label>Last Name:</label>
+        <p th:text="${customer.getLastName()}"></p>
+    </div>
+</div>
+
+<!-- Logout Button -->
+<br><br>
+<form th:action="@{/logout}" method="post">
+    <input id="submitButton" type="submit" value="Logout" class="btn btn-primary"/>
+</form>
+<br>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

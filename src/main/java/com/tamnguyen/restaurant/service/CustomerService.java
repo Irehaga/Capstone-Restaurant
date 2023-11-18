@@ -12,7 +12,7 @@ import java.util.List;
 public interface CustomerService {
 
 
-    void createCustomer(CustomerDTO customerDTO, List<OrderDTO> orderDTO) throws UserExistException;
+    void createCustomer(CustomerDTO customerDTO) throws UserExistException;
 
     CustomerDTO findCustomerByEmail(String email);
 

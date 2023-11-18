@@ -31,7 +31,7 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    public User(String email, String login, String password, String enabled) {
+    public User(String email, String password, String enabled) {
         this.email = email;
         this.password = password;
         this.enabled = enabled;

@@ -2,6 +2,7 @@ package com.tamnguyen.restaurant.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Tam Nguyen
@@ -10,8 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/index")
-    public String index(){
-
+    public String showIndexPage(){
         return "index";
     }
+
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+
 }

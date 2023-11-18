@@ -11,6 +11,7 @@ import com.tamnguyen.restaurant.service.CustomerService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,32 +27,25 @@ import java.util.stream.Collectors;
 public class CustomerServiceImp implements CustomerService {
 
 
-    private CustomerRepository customerRepository;
-    private OrderRepository orderRepository;
+    private final CustomerRepository customerRepository;
+    private final ModelMapper modelMapper;
 
-    public CustomerServiceImp(CustomerRepository customerRepository, OrderRepository orderRepository){
+    @Autowired
+    public CustomerServiceImp(CustomerRepository customerRepository, ModelMapper modelMapper){
 
         this.customerRepository = customerRepository;
-        this.orderRepository    = orderRepository;
+        this.modelMapper = modelMapper;
+
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     @Override
     @Transactional
-    public void createCustomer(CustomerDTO customerDTO, List<OrderDTO> orderDTOs) throws UserExistException{
+    public void createCustomer(CustomerDTO customerDTO) throws UserExistException{
         if (customerRepository.findCustomerByEmail(customerDTO.getEmail()).isPresent()) {
             throw new UserExistException("Account is already registered");
         } else {
-            ModelMapper modelMapper = new ModelMapper();
-            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
             Customer customer = modelMapper.map(customerDTO, Customer.class);
-            List<Order> orders = new ArrayList<>();
-            for (OrderDTO orderDTO : orderDTOs) {
-                Order order = modelMapper.map(orderDTO, Order.class);
-                orders.add(order);
-            }
-
-            orderRepository.saveAll(orders);
-            customer.setOrders(orders);
             customerRepository.save(customer);
         }
     }
@@ -59,38 +53,27 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     @Transactional
     public CustomerDTO findCustomerByEmail(String email) {
-
         Optional<Customer> customerOptional = customerRepository.findCustomerByEmail(email);
-
         try{
             if(customerOptional.isPresent()){
                 Customer customer = customerOptional.get();
-                ModelMapper modelMapper = new ModelMapper();
-                modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
                 return modelMapper.map(customer, CustomerDTO.class);
             }
         }catch (RuntimeException exception){
-
             throw new RuntimeException("Customer not found");
         }
-
         throw new RuntimeException("Customer not found");
-
     }
 
 
     @Override
     @Transactional
     public List<CustomerDTO> getAllCustomers() {
-
         List<CustomerDTO> customerDTOS = new ArrayList<>();
         for(Customer customer : customerRepository.findAll()){
-            ModelMapper modelMapper = new ModelMapper();
-            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
             CustomerDTO customerDTO = modelMapper.map(customer, CustomerDTO.class);
             customerDTOS.add(customerDTO);
         }
-
         return customerDTOS;
     }
 

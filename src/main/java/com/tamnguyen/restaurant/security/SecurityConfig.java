@@ -2,7 +2,6 @@ package com.tamnguyen.restaurant.security;
 
 import com.tamnguyen.restaurant.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,7 +9,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 /**
  * @author Tam Nguyen
@@ -40,8 +41,25 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(
-                auth -> auth.requestMatchers("/**").permitAll());
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/index",
+                                        "/css/*",
+                                        "/customer/register",
+                                        "/menu", "/menu/add",
+                                        "/contact").permitAll()
+                       .requestMatchers("/account")
+                       .hasAnyRole("CUSTOMER").anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/account")
+                        .permitAll())
+                .logout(logout -> logout
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll());
+
 //                        auth -> auth.requestMatchers("/",
 //                                        "/css/*", "/js/*","/img/*",
 //                                        "/form", "/sign-up-process", "/confirmation-page",

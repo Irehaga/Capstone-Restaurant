@@ -15,7 +15,7 @@ import java.util.List;
 public class RoleServiceImp implements com.tamnguyen.restaurant.service.RoleService{
 
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
     public RoleServiceImp(RoleRepository repository){
