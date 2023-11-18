@@ -3,6 +3,7 @@ package com.tamnguyen.restaurant.entity;
 import com.tamnguyen.restaurant.enums.MembershipStatus;
 import com.tamnguyen.restaurant.enums.MembershipType;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
  * @author Tam Nguyen
  */
 @Entity
+@Data
 public class Membership {
 
 

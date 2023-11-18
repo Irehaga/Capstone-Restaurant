@@ -47,7 +47,8 @@ public class SecurityConfig {
                                         "/img/**",
                                         "/customer/register",
                                         "/menu", "/menu/add",
-                                        "/contact").permitAll()
+                                        "/contact",
+                                "/account").permitAll()
                        .requestMatchers("/account")
                         .authenticated())
                 .formLogin(form -> form
