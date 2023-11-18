@@ -4,6 +4,7 @@ import com.tamnguyen.restaurant.dto.CustomerDTO;
 import com.tamnguyen.restaurant.dto.OrderDTO;
 import com.tamnguyen.restaurant.dto.UserDTO;
 import com.tamnguyen.restaurant.entity.Customer;
+import com.tamnguyen.restaurant.entity.Role;
 import com.tamnguyen.restaurant.enums.RoleName;
 import com.tamnguyen.restaurant.exceptionhandle.UserExistException;
 import com.tamnguyen.restaurant.service.CustomerService;
@@ -19,6 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.tamnguyen.restaurant.utility.PageTemaplate.CUSTOMER_SIGN_UP;
 import static com.tamnguyen.restaurant.utility.PageTemaplate.SUCCESSFUL_SIGN_UP_PAGE;
@@ -83,6 +87,23 @@ public class CustomerController {
         }
         return SUCCESSFUL_SIGN_UP_PAGE;
 }
+
+
+
+    @GetMapping("/account")
+    public String userDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        UserDTO userDTO = userService.findUserByEmail(userDetails.getUsername());
+        List<Role> roleList = userDTO.getRoles().stream().collect(Collectors.toList());
+        boolean isCustomer = roleList.stream().anyMatch(role -> role.getRoleName().equals(RoleName.ROLE_CUSTOMER.name()));
+        if(isCustomer){
+            CustomerDTO customerDTO = customerService.findCustomerByEmail(userDetails.getUsername());
+            model.addAttribute("customer", customerDTO);
+            model.addAttribute("order", customerDTO.getOrders());
+        }else{
+            return "/index";
+        }
+        return "customer-account-dashboard";
+    }
 
 
 

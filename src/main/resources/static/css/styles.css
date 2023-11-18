@@ -44,3 +44,11 @@ body {
     padding-bottom: 20px;
 }
 /* end of message when success using the contact form*/
+
+
+html, body {
+    height: 100%;
+}
+.full-height {
+    height: 100%;
+}

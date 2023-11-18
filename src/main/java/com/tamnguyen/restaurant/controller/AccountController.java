@@ -39,18 +39,18 @@ public class AccountController {
     }
 
 
-    @GetMapping("/account")
-    public String userDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        UserDTO userDTO = userService.findUserByEmail(userDetails.getUsername());
-        List<Role> roleList = userDTO.getRoles().stream().collect(Collectors.toList());
-        boolean isCustomer = roleList.stream().anyMatch(role -> role.getRoleName().equals(RoleName.ROLE_CUSTOMER.name()));
-        if(isCustomer){
-            CustomerDTO customerDTO = customerService.findCustomerByEmail(userDetails.getUsername());
-            model.addAttribute("customer", customerDTO);
-            model.addAttribute("order", customerDTO.getOrders());
-        }else{
-            return "/login";
-        }
-        return "customer-account-dashboard";
-    }
+//    @GetMapping("/account")
+//    public String userDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+//        UserDTO userDTO = userService.findUserByEmail(userDetails.getUsername());
+//        List<Role> roleList = userDTO.getRoles().stream().collect(Collectors.toList());
+//        boolean isCustomer = roleList.stream().anyMatch(role -> role.getRoleName().equals(RoleName.ROLE_CUSTOMER.name()));
+//        if(isCustomer){
+//            CustomerDTO customerDTO = customerService.findCustomerByEmail(userDetails.getUsername());
+//            model.addAttribute("customer", customerDTO);
+//            model.addAttribute("order", customerDTO.getOrders());
+//        }else{
+//            return "/login";
+//        }
+//        return "customer-account-dashboard";
+//    }
 }

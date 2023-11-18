@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
+
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -43,12 +43,13 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index",
-                                        "/css/*",
+                                        "/css/**",
+                                        "/img/**",
                                         "/customer/register",
                                         "/menu", "/menu/add",
                                         "/contact").permitAll()
                        .requestMatchers("/account")
-                       .hasAnyRole("CUSTOMER").anyRequest().authenticated())
+                        .authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
