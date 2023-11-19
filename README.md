@@ -17,7 +17,7 @@ Welcome to the GitHub repository for My Vietnamese Restaurant, an innovative web
 
 ### Installation
 1. **Clone the repository:**
-   git clone https://github.com/yourusername/restaurant-project.git
+   git clone https://github.com/Irehaga/Capstone-Restaurant
 2. **Configure MySQL Database:**
    - Create a new database named `restaurant_db`.
    - Update `src/main/resources/application.properties` with your database credentials.
