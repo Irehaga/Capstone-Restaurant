@@ -18,7 +18,6 @@ public interface MenuItemService  {
 
   void createMenuItem( MenuItemDTO menuItemDTO);
 
-
   void updateMenuItem(int menuItemId, MenuItemDTO menuItemDTO) throws MenuItemNotFoundException;
 
 

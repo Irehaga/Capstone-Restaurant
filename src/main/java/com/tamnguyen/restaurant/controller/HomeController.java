@@ -21,4 +21,10 @@ public class HomeController {
         return "login";
     }
 
+    @RequestMapping("/home")
+    public String homePage(){
+        return "redirect:/account";
+
+    }
+
 }

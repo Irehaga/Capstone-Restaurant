@@ -30,15 +30,27 @@ public class CustomerServiceImp implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
+    /**
+     *  Initialized the service using customerRepository
+     * @param customerRepository
+     * @param modelMapper
+     */
     @Autowired
     public CustomerServiceImp(CustomerRepository customerRepository, ModelMapper modelMapper){
-
         this.customerRepository = customerRepository;
         this.modelMapper = modelMapper;
-
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
+
+    /**
+     *         Create new customer from customerDTO . This method checks if
+     *         is already exist if not then create it using modal mapper to map
+     *         customerDTO to customer entity.
+     * @param customerDTO getting customerDTO info to create customer
+     *                    and save to customer entities.
+     * @throws UserExistException
+     */
     @Override
     @Transactional
     public void createCustomer(CustomerDTO customerDTO) throws UserExistException{
@@ -50,6 +62,15 @@ public class CustomerServiceImp implements CustomerService {
         }
     }
 
+
+    /**
+     *
+     * @param email retrieve customer base on their email
+     *              this method checks for if email is valid
+     *              then convert customer entity to customerDTo if found
+     *              if there are error it will throw message customer not found.
+     * @return
+     */
     @Override
     @Transactional
     public CustomerDTO findCustomerByEmail(String email) {
@@ -66,6 +87,12 @@ public class CustomerServiceImp implements CustomerService {
     }
 
 
+    /**   this method retrieves all customer from database
+     *    then it mapped customer entity to customer DTO and add t
+     *    o the return list of customerDTO
+     *
+     * @return list of all customerDTO
+     */
     @Override
     @Transactional
     public List<CustomerDTO> getAllCustomers() {

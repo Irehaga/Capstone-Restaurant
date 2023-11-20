@@ -79,7 +79,7 @@ public class CustomerController {
             }
             customerService.createCustomer(customerDTO);
             userDTO.setEmail(customerDTO.getEmail());
-            userDTO.setRole(RoleName.ROLE_CUSTOMER.name());
+            userDTO.setRole("ROLE_CUSTOMER");
             userService.saveUser(userDTO);
         } catch (UserExistException e){
             model.addAttribute("message", "User already exist");
@@ -94,13 +94,15 @@ public class CustomerController {
     public String userDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         UserDTO userDTO = userService.findUserByEmail(userDetails.getUsername());
         List<Role> roleList = userDTO.getRoles().stream().collect(Collectors.toList());
-        boolean isCustomer = roleList.stream().anyMatch(role -> role.getRoleName().equals(RoleName.ROLE_CUSTOMER.name()));
+        boolean isCustomer = roleList.stream().anyMatch(role -> role.getRoleName().equals("ROLE_CUSTOMER"));
         if(isCustomer){
+            logger.warn("something is wrong");
             CustomerDTO customerDTO = customerService.findCustomerByEmail(userDetails.getUsername());
             model.addAttribute("customer", customerDTO);
             model.addAttribute("order", customerDTO.getOrders());
         }else{
-            return "/index";
+            logger.warn("something is wrong");
+            return "index";
         }
         return "customer-account-dashboard";
     }

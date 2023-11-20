@@ -77,7 +77,6 @@ public class UserServiceImp implements UserService {
     @Override
     @Transactional
     public void saveUser(UserDTO userDTO) throws UserExistException {
-
         if(userRepository.findUserByEmail(userDTO.getEmail()).isPresent())
         {
             throw new UserExistException("User exist");

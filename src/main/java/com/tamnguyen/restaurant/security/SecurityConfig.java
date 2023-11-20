@@ -2,6 +2,7 @@ package com.tamnguyen.restaurant.security;
 
 import com.tamnguyen.restaurant.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -47,37 +48,21 @@ public class SecurityConfig {
                                         "/img/**",
                                         "/customer/register",
                                         "/menu", "/menu/add",
-                                        "/contact",
-                                "/account").permitAll()
+                                        "/contact"
+                                        ).permitAll()
                        .requestMatchers("/account")
-                        .authenticated())
+                        .hasAnyRole("CUSTOMER").anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/account")
+                        .successForwardUrl("/home")
+                        .failureForwardUrl("/index")
                         .permitAll())
                 .logout(logout -> logout
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .permitAll());
-
-//                        auth -> auth.requestMatchers("/",
-//                                        "/css/*", "/js/*","/img/*",
-//                                        "/form", "/sign-up-process", "/confirmation-page",
-//                                        "/login").permitAll()
-//                                .requestMatchers("/account")
-//                                .hasAnyRole("EMPLOYEE")
-//                                .anyRequest().authenticated())
-//                .formLogin(form -> form.loginPage("/login")
-//                        .loginProcessingUrl("/login")
-//                        .successForwardUrl("/home")
-//                        .permitAll())
-//                .logout(logout -> logout
-//                        .invalidateHttpSession(true)
-//                        .clearAuthentication(true)
-//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                        .permitAll());
 
         return http.build();
 

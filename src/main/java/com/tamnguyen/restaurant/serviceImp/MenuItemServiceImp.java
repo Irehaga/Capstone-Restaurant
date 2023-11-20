@@ -27,6 +27,13 @@ public class MenuItemServiceImp implements com.tamnguyen.restaurant.service.Menu
     private final MenuItemRepository menuItemRepository;
     private final ModelMapper modelMapper;
 
+
+    /**
+     *
+     * @param menuItemRepository initializes the service with menuItemRepo and modelmapper
+     *
+     * @param modelMapper
+     */
     @Autowired
     public MenuItemServiceImp(MenuItemRepository menuItemRepository, ModelMapper modelMapper) {
         this.menuItemRepository = menuItemRepository;
@@ -34,8 +41,15 @@ public class MenuItemServiceImp implements com.tamnguyen.restaurant.service.Menu
         this.modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
+    /**
+     *
+     * @param name
+     * @return menuItemDTO name if found
+     * @throws MenuItemNotFoundException
+     */
 
     @Override
+    @Transactional
     public MenuItemDTO findMenuItemByName(String name) throws MenuItemNotFoundException {
         Optional<MenuItem>  menuItemOptional = menuItemRepository.findMenuItemByName(name);
         if(menuItemOptional.isPresent()){
@@ -45,10 +59,14 @@ public class MenuItemServiceImp implements com.tamnguyen.restaurant.service.Menu
         }
     }
 
+
+    /**
+     *
+     * @return return all item in menu from entity and convert it to menuitemDTO
+     */
     @Override
     @Transactional
     public List<MenuItemDTO> getAllMenuItems() {
-
         List<MenuItemDTO> menuItemDTOS = new ArrayList<>();
         for(MenuItem item : menuItemRepository.findAll()){
            MenuItemDTO menuItemDTO = modelMapper.map(item, MenuItemDTO.class);
@@ -57,6 +75,10 @@ public class MenuItemServiceImp implements com.tamnguyen.restaurant.service.Menu
         return menuItemDTOS;
     }
 
+    /**
+     *
+     * @param menuItemDTO save from menuItemDTO to menu entity
+     */
     @Override
     @Transactional
     public void createMenuItem(MenuItemDTO menuItemDTO) {
@@ -64,10 +86,16 @@ public class MenuItemServiceImp implements com.tamnguyen.restaurant.service.Menu
         menuItemRepository.save(menuItem);
     }
 
+
+    /**
+     *        Allow updating menyItem based on its ID. then updated it with data from  menuitemDTO
+     * @param menuItemId
+     * @param menuItemDTO
+     * @throws MenuItemNotFoundException throw when item not found.
+     */
     @Override
     @Transactional
     public void updateMenuItem(int menuItemId, MenuItemDTO menuItemDTO) throws MenuItemNotFoundException {
-
         Optional<MenuItem> menuItemOptional = menuItemRepository.findById(menuItemId);
         if(menuItemOptional.isPresent()){
             MenuItem menuItem = menuItemOptional.get();

@@ -16,7 +16,4 @@ public interface OrderService {
 
     String createOrder(OrderDTO orderDTO, List<MenuItemDTO> selectMenuItems);
 
-
-
-
 }
