@@ -40,7 +40,6 @@ public class MembershipRepositoryTest {
         membership.setEndDate(LocalDate.now().plusYears(1));
         membership.setStatus(MembershipStatus.ACTIVE);
         membership.setUser(user);
-
         membershipRepository.save(membership);
     }
 

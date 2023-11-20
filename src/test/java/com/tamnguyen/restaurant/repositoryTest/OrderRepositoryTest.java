@@ -63,6 +63,5 @@ import com.tamnguyen.restaurant.enums.OrderStatus;
 
         assertThat(foundOrder).isNotNull();
         assertThat(foundOrder.getOrderNumber()).isEqualTo(order.getOrderNumber());
-        // Additional assertions as needed
     }
 }
