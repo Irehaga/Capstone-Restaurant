@@ -42,6 +42,14 @@ public class CustomerController {
     private final UserService userService;
 
     private final OrderService orderService;
+
+
+    /**
+     *       initialize the controller with the params below
+     * @param customerService
+     * @param userService
+     * @param orderService
+     */
     @Autowired
     public CustomerController(CustomerService customerService, UserService userService, OrderService orderService) {
         this.customerService = customerService;
@@ -49,6 +57,12 @@ public class CustomerController {
         this.orderService = orderService;
     }
 
+    /**
+     *  displays the registration form
+     *  add empty CustomerDtO and userDTO to the model
+     * @param model
+     * @return
+     */
 
     @GetMapping("/register")
     public String showRegisterForm(Model model){
@@ -58,6 +72,18 @@ public class CustomerController {
     }
 
 
+    /**
+     *    Handle the registration process, validates input data and checks for password match
+     *    Create customer and user if validation passes or return to registration form with errors.
+     *
+     *
+     * @param customerDTO
+     * @param bindingResult
+     * @param userDTO
+     * @param userBidingResult
+     * @param model
+     * @return return either error messages or success page upon successful registration.
+     */
     @PostMapping("/register")
     public String registerCustomer(@Valid @ModelAttribute("customer") CustomerDTO customerDTO,
                                BindingResult bindingResult,
@@ -89,7 +115,15 @@ public class CustomerController {
 }
 
 
-
+    /**
+     *  Display the user dashboard for customer after successful login
+     *  Checks if the logged in user is customer and retrieves their data
+     *  adds customer details and order to the model for display
+     *
+     * @param userDetails
+     * @param model
+     * @return return to index if there is an error ele go to customer account page
+     */
     @GetMapping("/account")
     public String userDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         UserDTO userDTO = userService.findUserByEmail(userDetails.getUsername());
